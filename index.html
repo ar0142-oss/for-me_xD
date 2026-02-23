@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For Raisa 💖</title>
+    <style>
+        /* MAIN BACKGROUND */
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            /* Matches the requested radial gradient */
+            background: radial-gradient(circle, #fff5f7 0%, #fbc2d4 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* BOLD HIGHLIGHTED CARD */
+        .card {
+            background: linear-gradient(135deg, #ffffff 0%, #fff5f7 100%);
+            padding: 50px 30px;
+            border-radius: 40px;
+            text-align: center;
+            position: relative; 
+            width: 85%;
+            max-width: 400px;
+            
+            /* Extra Bold Border */
+            border: 5px solid #f4a7bb; 
+            z-index: 10;
+            
+            /* Intense Bold Glow Effect */
+            box-shadow: 
+                0 20px 50px rgba(244, 167, 187, 0.6), 
+                0 0 80px rgba(255, 255, 255, 0.9);
+            
+            /* Smooth Entrance Animation */
+            animation: popIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        /* BOLD BOW */
+        .bow {
+            position: absolute;
+            top: -30px;
+            left: -25px;
+            width: 50px;
+            height: 50px;
+            background: #f4a7bb;
+            border-radius: 50%;
+            z-index: 15;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .bow::before, .bow::after {
+            content: '';
+            position: absolute;
+            width: 65px;
+            height: 65px;
+            background: #f4a7bb;
+            border-radius: 50% 50% 0 50%;
+            top: -20px;
+            left: -45px;
+            transform: rotate(-45deg);
+            box-shadow: inset -6px -6px 12px rgba(0,0,0,0.08);
+        }
+
+        .bow::after {
+            border-radius: 50% 50% 50% 0;
+            left: 30px;
+            transform: rotate(45deg);
+        }
+
+        /* EXTRA BOLD TYPOGRAPHY */
+        h2 {
+            color: #d17a8e;
+            font-size: 2.2rem;
+            font-weight: 900; /* Maximum Boldness */
+            margin-bottom: 35px;
+            line-height: 1.2;
+            text-shadow: 2px 2px 4px rgba(244, 167, 187, 0.3);
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            height: 60px;
+        }
+
+        /* BOLD BUTTONS */
+        button {
+            background-color: #f4a7bb;
+            color: white;
+            border: 3px solid #ffffff; /* Defined Bold Outline */
+            padding: 14px 38px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 1.3rem;
+            font-weight: 900;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 15px rgba(244, 167, 187, 0.5);
+        }
+
+        #yes-btn:hover {
+            background-color: #f08da6;
+            transform: scale(1.15);
+        }
+
+        #no-btn {
+            position: relative;
+            z-index: 20;
+        }
+
+        #message {
+            margin-top: 30px;
+            color: #d17a8e;
+            font-weight: 900;
+            font-size: 1.4rem;
+            min-height: 1.5em;
+        }
+
+        /* FLOATING HEARTS */
+        .heart {
+            position: absolute;
+            pointer-events: none;
+            animation: floatUp 3s ease-out forwards;
+            z-index: 5;
+        }
+
+        @keyframes floatUp {
+            0% { transform: scale(0) translateY(0); opacity: 0; }
+            20% { opacity: 0.8; }
+            100% { transform: scale(1.5) translateY(-250px); opacity: 0; }
+        }
+
+        @keyframes popIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+
+        /* MOBILE ADJUSTMENTS */
+        @media (max-width: 480px) {
+            h2 { font-size: 1.8rem; }
+            .card { padding: 40px 20px; }
+            button { padding: 12px 30px; font-size: 1.1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="card">
+        <div class="bow"></div>
+        
+        <h2>Do you think Raisa is the best?😒</h2>
+
+        <div class="button-group">
+            <button id="yes-btn" onclick="celebrate()">Yes</button>
+            <button id="no-btn" onmouseover="moveButton()" onclick="moveButton()">No</button>
+        </div>
+
+        <p id="message"></p>
+    </div>
+
+    <script>
+        /**
+         * Keeps the "No" button escaping from the cursor
+         */
+        function moveButton() {
+            const btn = document.getElementById('no-btn');
+            
+            // Switch to fixed to jump anywhere on screen
+            if (btn.style.position !== 'fixed') {
+                btn.style.position = 'fixed';
+            }
+
+            const padding = 25;
+            const maxX = window.innerWidth - btn.offsetWidth - padding;
+            const maxY = window.innerHeight - btn.offsetHeight - padding;
+
+            // Stay within safe visible area
+            const randomX = Math.floor(Math.random() * (maxX - padding) + padding);
+            const randomY = Math.floor(Math.random() * (maxY - padding) + padding);
+
+            btn.style.left = randomX + 'px';
+            btn.style.top = randomY + 'px';
+        }
+
+        /**
+         * Celebration logic
+         */
+        function celebrate() {
+            const message = document.getElementById('message');
+            const noBtn = document.getElementById('no-btn');
+            
+            message.innerHTML = "Yay! Raisa is always besttt! 💖✨";
+            noBtn.style.display = 'none';
+            
+            // Celebration heart burst
+            setInterval(createHeart, 120);
+        }
+
+        /**
+         * Create floating heart particles
+         */
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.className = 'heart';
+            heart.innerHTML = '💗';
+            
+            const size = Math.random() * 20 + 20;
+            heart.style.fontSize = size + 'px';
+            heart.style.left = Math.random() * window.innerWidth + 'px';
+            heart.style.top = Math.random() * window.innerHeight + 'px';
+            
+            document.body.appendChild(heart);
+
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+
+        // Background drift hearts
+        setInterval(createHeart, 700);
+    </script>
+</body>
+</html>
